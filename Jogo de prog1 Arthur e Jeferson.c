@@ -43,7 +43,7 @@ for(x=0;x<=4;x++){
     
         
     
-        while(vetor[i][j]==3){
+        while(vetor[i][j]==3|| vetor[i][j]==4){
        
             i=rand()%7;
         
@@ -112,7 +112,7 @@ else{
         
             j=rand()%7;
        
-            while( vetor[i][j]!=1){
+            while( vetor[i][j]!=1 && vetor[i][j]!=3){
            
             i=rand()%7;
         
