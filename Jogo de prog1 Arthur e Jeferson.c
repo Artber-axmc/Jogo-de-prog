@@ -31,6 +31,11 @@ int main() {
 for(x=0;x<=4;x++){
 
     scanf("%d,%d", &i, &j);
+
+    while(vetor[i][j]==3){
+        printf("insira novamente\n");
+        scanf("%d,%d", &i,&j);
+    }
        
         vetor[i][j]=3;
 }
