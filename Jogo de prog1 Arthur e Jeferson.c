@@ -3,13 +3,67 @@
 #include <time.h>
 #include <ctype.h>
 #include <locale.h>
+int verificar2(int vetor[7][7]){
+    int i,j;
+    for(i=0;i<=6;i++){
+       
+            for(j=0;j<=6;j++){
+                if(vetor[i][j]==3){
+                    return 1;
+}
+}
+}
+return 0;
+}
+int verificar(int vetor[7][7]){
+    int i,j;
+    for(i=0;i<=6;i++){
+       
+            for(j=0;j<=6;j++){
+               
+                if(vetor[i][j]==4){
+                     return 1;
+                   
+} 
+}
+}
+return 0;
+}
+void matriz(int vetor[7][7]){
+    int i,j;
+    printf(" X=Posições não selecionadas; O=Suas sobremesas; Y=Suas sobremesas encontradas pelo oponente; F=Sobremesas do oponente encontradas; A=espaços vazios\n");
+    printf("  0 1 2 3 4 5 6\n");
+    for(i=0;i<=6;i++){
+        printf("%d",i);
+        for(j=0;j<=6;j++){
+            if(vetor[i][j]==4){
+                printf(" X");
+}           else if(vetor[i][j]==0){
+                printf(" A");
+}
+            else if(vetor[i][j]==3){
+                printf(" O");
+}
+            else if(vetor[i][j]==2){
+                printf(" F");
+}
+            else if (vetor[i][j]==5){
+                printf(" Y");
+}
+            else{
+                printf(" X");
+ }
+    }
+        printf("\n");
+    }
+}
 int main() {
     setlocale(LC_ALL, "Portuguese_Brazil");
    
     srand(time(NULL));
    
     int vetor[7][7];
-    int i,j,y,x,start;
+    int i,j,y,x,start,valido=1;
    
     printf("\n\n\t  SOBREMESAS\n(Um jogo inspirado em batalha naval!)\n\n\tDigita 1 para comecar\n\tDigite 0 para sair\n\tDigite 2 para os Creditos\n");
     scanf("%d",&start);
@@ -18,22 +72,20 @@ int main() {
     {
     case 1:
         printf("\n\n");
+        for(i=0;i<7;i++){
+            for(j=0;j<7;j++){
+                vetor[i][j]=1;
+            }}
            
-printf("  0 1 2 3 4 5 6\n");
-            for(i=0;i<=6;i++){
-            printf("%d",i);
-                for(j=0;j<=6;j++){
-                    vetor[i][j]=1;
-                    printf(" X");
-}
+matriz(vetor);
             printf("\n");
 
-}       printf("\nInsira agora 5 posições, com os numeros de 0 até 6 com virgulas no meio.(ex:0,3)\n");
+      printf("\nInsira agora 5 posições para suas sobremesas,com os numeros de 0 até 6 com virgulas no meio (ex:0,3).\n");
 for(x=0;x<=4;x++){
 
     scanf("%d,%d", &i, &j);
 
-    while(vetor[i][j]==3){
+    while(vetor[i][j]==3|| i<0 || j<0 || i>6 ||j>6){
         printf("insira novamente\n");
         scanf("%d,%d", &i,&j);
     }
@@ -56,7 +108,6 @@ for(x=0;x<=4;x++){
             j=rand()%7;
  }  
         vetor[i][j]=4;
-    printf(" %d,%d \n", i,j);
 }
 
     x=1;
@@ -66,56 +117,29 @@ for(x=0;x<=4;x++){
    
         x=0;
         y=0;
-    printf("   0 1 2 3 4 5 6\n");
-        for(i=0;i<=6;i++){
-       printf("%d|",i);
-            for(j=0;j<=6;j++){
-               
-                if(vetor[i][j]==4){
-                        printf(" X");
-                   
-}               else if(vetor[i][j]==3){
-                        printf(" O");
-                   
-} else if(vetor[i][j]==2){
-printf(" F");
-} else if (vetor[i][j]==5){
-printf(" Y");
-}
-                    else{
-                    printf(" X", vetor[i][j]);
-}
-}
- 
-printf("\n");
-}
-printf("\n");
+   matriz(vetor);
+   valido=1;
+   while(valido){
    
 printf("digita a posição:\n");
    
 scanf(" %d,%d", &i,&j);
-         
 if(vetor[i][j]==4){
-            printf("Você encontrou uma sobremesa!\n");
+            printf("Você encontrou uma sobremesa do oponente!\n");
             vetor[i][j]=2;
-}
-         
+            valido=0;
+}   else if(vetor[i][j]==3 || vetor [i][j]==5 || vetor[i][j]==2 || j>6 || i>6 || i<0 || j<0){
+    printf("você não pode selecionar essa posição\n");
+    }
+   
 else{
-                    printf("Você não encontrou....\n");
+                    printf("Você não encontrou nada....\n");
                     vetor[i][j]=0;
-}
-        for(i=0;i<=6;i++){
-       
-            for(j=0;j<=6;j++){
-               
-                if(vetor[i][j]==4){
-                       x=1;
-                   
-}               else if(vetor[i][j]==3){
-                    y=1;
-}
-}
-}   if(x==0){
+                    valido=0;
+}}
+    
+x=verificar(vetor);
+if(x==0){
     break;
 }
             i=rand()%7;
@@ -135,21 +159,13 @@ else{
     else {
         vetor[i][j]=0;
     }
-    for(i=0;i<=6;i++){
-       
-            for(j=0;j<=6;j++){
-               
-               if(vetor[i][j]==3){
-                    y=1;
-}
-}
-}
+    y=verificar2(vetor);
 }
     if(x==0){
-        printf("Você ganhou!\n");
+        printf("Você encontrou todas as sobremesas! E para aos vencedores, a GRANITA!\n");
     }
     else{
-        printf("Você perdeu...\n");
+        printf("O oponente encontrou todas as suas sobremesas. Para os perdedores, a rapadura.\n");
     }
  printf("\n");
 
