@@ -31,7 +31,7 @@ return 0;
 }
 void matriz(int vetor[7][7]){
     int i,j;
-    printf(" X=Posições não selecionadas; O=Suas sobremesas; Y=Suas sobremesas encontradas pelo oponente; F=Sobremesas do oponente encontradas; A=espaços vazios\n");
+    printf(" X=Posições não selecionadas; O=Suas sobremesas; #=Suas sobremesas encontradas pelo oponente; $=Sobremesas do oponente encontradas; ~=espaços vazios\n");
     printf("  0 1 2 3 4 5 6\n");
     for(i=0;i<=6;i++){
         printf("%d",i);
@@ -39,16 +39,16 @@ void matriz(int vetor[7][7]){
             if(vetor[i][j]==4){
                 printf(" X");
 }           else if(vetor[i][j]==0){
-                printf(" A");
+                printf(" ~");
 }
             else if(vetor[i][j]==3){
                 printf(" O");
 }
             else if(vetor[i][j]==2){
-                printf(" F");
+                printf(" $");
 }
             else if (vetor[i][j]==5){
-                printf(" Y");
+                printf(" #");
 }
             else{
                 printf(" X");
